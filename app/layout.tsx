@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://hennatouch.com'), // Replace with actual domain
+  metadataBase: new URL('https://henna-touch.vercel.app'),
   title: {
     default: 'Henna Touch | Exquisite Mehndi Artistry in Bangalore',
     template: '%s | Henna Touch',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_IN',
-    url: 'https://hennatouch.com',
+    url: 'https://henna-touch.vercel.app',
     title: 'Henna Touch | Exquisite Mehndi Artistry',
     description: 'Professional Mehndi Artist in Bangalore specializing in bridal and intricate henna designs.',
     siteName: 'Henna Touch',
@@ -53,7 +53,7 @@ export default function RootLayout({
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness', // or BeautySalon / ProfessionalService
     name: 'Henna Touch',
-    image: 'https://hennatouch.com/hero.jpg',
+    image: 'https://henna-touch.vercel.app/hero.jpg',
     description: 'Professional Mehndi Artist in Bangalore specializing in bridal and intricate henna designs.',
     address: {
       '@type': 'PostalAddress',
@@ -66,7 +66,7 @@ export default function RootLayout({
       latitude: '12.9716', // Approximate Bangalore coords
       longitude: '77.5946'
     },
-    url: 'https://hennatouch.com',
+    url: 'https://henna-touch.vercel.app',
     telephone: '+919876543210', // Replace with actual
     priceRange: '₹₹',
     openingHoursSpecification: [

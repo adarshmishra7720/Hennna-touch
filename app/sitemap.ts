@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://hennatouch.com' // Replace with actual domain when deployed
+    const baseUrl = 'https://henna-touch.vercel.app'
 
     return [
         {
