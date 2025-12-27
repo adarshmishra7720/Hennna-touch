@@ -66,7 +66,7 @@ export default function LeadsPage() {
                             {leads.length === 0 ? (
                                 <tr>
                                     <td colSpan={5} className="px-6 py-12 text-center text-stone-500">
-                                        No leads found. Ensure you have created the 'leads' table in Supabase.
+                                        No leads found. Ensure you have created the &apos;leads&apos; table in Supabase.
                                     </td>
                                 </tr>
                             ) : (

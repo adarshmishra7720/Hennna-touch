@@ -1,9 +1,9 @@
 "use client"
 
 import { useEffect, useState } from 'react'
-import { supabase } from '../lib/supabase'
+import Image from 'next/image'
 import { getAdminData, deleteImage } from '../actions'
-import { Users, MousePointerClick, Calendar, Upload, Loader2, Image as ImageIcon, Trash2, TrendingUp } from 'lucide-react'
+import { Users, Upload, Loader2, Image as ImageIcon, Trash2, TrendingUp } from 'lucide-react'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 
 // Define types
@@ -43,7 +43,6 @@ export default function AdminDashboard() {
     const [interactions, setInteractions] = useState<Interaction[]>([])
     const [portfolio, setPortfolio] = useState<PortfolioItem[]>([])
     const [loading, setLoading] = useState(true)
-    const [uploading, setUploading] = useState(false)
 
     const [fetchError, setFetchError] = useState<string | null>(null)
     const [chartData, setChartData] = useState<DailyStats[]>([])
@@ -281,10 +280,12 @@ export default function AdminDashboard() {
                                 {portfolio.map((item) => (
                                     <div key={item.id} className="group relative aspect-square bg-stone-100 rounded-lg overflow-hidden border border-stone-200">
                                         <div className="relative w-full h-full">
-                                            <img
+                                            <Image
                                                 src={item.image_url}
                                                 alt={item.title || 'Portfolio'}
-                                                className="w-full h-full object-cover"
+                                                fill
+                                                className="object-cover"
+                                                sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 16vw"
                                             />
                                         </div>
                                         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">

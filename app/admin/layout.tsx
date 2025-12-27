@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { LayoutDashboard, Users, Image as ImageIcon, LogOut } from 'lucide-react'
+import { LayoutDashboard, Users, Image as ImageIcon } from 'lucide-react'
 
 export default function AdminLayout({
     children,
