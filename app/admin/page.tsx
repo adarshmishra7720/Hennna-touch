@@ -47,6 +47,7 @@ export default function AdminDashboard() {
     const [uploadMessage, setUploadMessage] = useState('')
     const [fetchError, setFetchError] = useState<string | null>(null)
     const [chartData, setChartData] = useState<DailyStats[]>([])
+    const [timeRange, setTimeRange] = useState(7)
 
     useEffect(() => {
         fetchData()
@@ -61,7 +62,7 @@ export default function AdminDashboard() {
                 setLeads(result.leads || [])
                 setInteractions(result.interactions || [])
                 setPortfolio(result.portfolio || [])
-                processChartData(result.interactions || [])
+                processChartData(result.interactions || [], result.leads || [], 7)
             } else {
                 console.error('Error fetching data:', result.error)
                 setFetchError(result.error)
@@ -73,33 +74,37 @@ export default function AdminDashboard() {
         setLoading(false)
     }
 
-    const processChartData = (data: Interaction[]) => {
-        const last7Days: DailyStats[] = []
-        for (let i = 6; i >= 0; i--) {
+    const processChartData = (data: Interaction[], leadsData: Lead[], days: number) => {
+        const chartStats: DailyStats[] = []
+        for (let i = days - 1; i >= 0; i--) {
             const d = new Date()
             d.setDate(d.getDate() - i)
-            const dateStr = d.toLocaleDateString("en-US", { month: 'short', day: 'numeric' }) // e.g., "Dec 25"
+            const dateStr = d.toLocaleDateString("en-US", { month: 'short', day: 'numeric' })
 
             // Filter interactions for this day
             const dayInteractions = data.filter(item => {
-                // Ensure item.created_at is defined
                 if (!item.created_at) return false
                 return new Date(item.created_at).toDateString() === d.toDateString()
             })
 
             // Filter leads for this day
-            const dayLeads = leads.filter(lead => {
+            const dayLeads = leadsData.filter(lead => {
                 return new Date(lead.created_at).toDateString() === d.toDateString()
             })
 
-            last7Days.push({
+            chartStats.push({
                 date: dateStr,
                 whatsapp: dayInteractions.filter(x => x.type === 'whatsapp_click').length,
                 call: dayInteractions.filter(x => x.type === 'call_click').length,
                 leads: dayLeads.length
             })
         }
-        setChartData(last7Days)
+        setChartData(chartStats)
+    }
+
+    const handleTimeRangeChange = (days: number) => {
+        setTimeRange(days)
+        processChartData(interactions, leads, days)
     }
 
     const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -209,7 +214,23 @@ export default function AdminDashboard() {
 
                     {/* Chart */}
                     <div className="bg-white p-6 rounded-xl shadow-sm border border-stone-200 lg:col-span-2">
-                        <h3 className="text-stone-500 text-sm font-medium mb-6">Traffic History (Last 7 Days)</h3>
+                        <div className="flex items-center justify-between mb-6">
+                            <h3 className="text-stone-500 text-sm font-medium">Traffic History</h3>
+                            <div className="flex bg-stone-100 p-1 rounded-lg">
+                                <button
+                                    onClick={() => handleTimeRangeChange(7)}
+                                    className={`px-3 py-1 text-xs font-medium rounded-md transition-all ${timeRange === 7 ? 'bg-white text-stone-900 shadow-sm' : 'text-stone-500 hover:text-stone-900'}`}
+                                >
+                                    7 Days
+                                </button>
+                                <button
+                                    onClick={() => handleTimeRangeChange(30)}
+                                    className={`px-3 py-1 text-xs font-medium rounded-md transition-all ${timeRange === 30 ? 'bg-white text-stone-900 shadow-sm' : 'text-stone-500 hover:text-stone-900'}`}
+                                >
+                                    30 Days
+                                </button>
+                            </div>
+                        </div>
                         <div className="h-64 w-full">
                             <ResponsiveContainer width="100%" height="100%">
                                 <BarChart data={chartData}>
