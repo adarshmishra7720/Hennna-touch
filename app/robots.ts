@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: '/admin/',
         },
-        sitemap: 'https://henna-touch.vercel.app/sitemap.xml',
+        sitemap: 'https://hennatouch.com/sitemap.xml',
     }
 }
