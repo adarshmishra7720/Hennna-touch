@@ -35,9 +35,10 @@ export default function UploadPage() {
             alert('Image uploaded successfully!')
             setFile(null)
             setPreview(null)
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error('Error uploading image:', error)
-            alert('Error uploading image: ' + error.message)
+            const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+            alert('Error uploading image: ' + errorMessage)
         } finally {
             setUploading(false)
         }

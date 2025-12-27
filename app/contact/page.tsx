@@ -8,7 +8,7 @@ export default function ContactPage() {
                 <div className="text-center mb-16">
                     <h1 className="font-serif text-4xl md:text-5xl text-stone-900 mb-6">Get in Touch</h1>
                     <p className="text-stone-600 max-w-2xl mx-auto">
-                        We'd love to hear from you. Fill out the form below or reach out to us directly.
+                        We&apos;d love to hear from you. Fill out the form below or reach out to us directly.
                     </p>
                 </div>
 

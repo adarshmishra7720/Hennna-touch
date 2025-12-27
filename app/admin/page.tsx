@@ -44,13 +44,14 @@ export default function AdminDashboard() {
     const [portfolio, setPortfolio] = useState<PortfolioItem[]>([])
     const [loading, setLoading] = useState(true)
     const [uploading, setUploading] = useState(false)
-    const [uploadMessage, setUploadMessage] = useState('')
+
     const [fetchError, setFetchError] = useState<string | null>(null)
     const [chartData, setChartData] = useState<DailyStats[]>([])
     const [timeRange, setTimeRange] = useState(7)
 
     useEffect(() => {
         fetchData()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     async function fetchData() {
@@ -107,11 +108,7 @@ export default function AdminDashboard() {
         processChartData(interactions, leads, days)
     }
 
-    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0]
-        if (!file) return
-        window.location.href = '/admin/upload'
-    }
+
 
     const handleDeleteImage = async (id: string, imageUrl: string) => {
         if (!confirm('Are you sure you want to delete this image?')) return
@@ -122,7 +119,7 @@ export default function AdminDashboard() {
                 alert('Error deleting image: ' + result.error)
                 fetchData() // Revert
             }
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error('Error deleting image:', error)
             alert('Error deleting image')
             fetchData()
@@ -283,11 +280,13 @@ export default function AdminDashboard() {
                             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
                                 {portfolio.map((item) => (
                                     <div key={item.id} className="group relative aspect-square bg-stone-100 rounded-lg overflow-hidden border border-stone-200">
-                                        <img
-                                            src={item.image_url}
-                                            alt={item.title || 'Portfolio'}
-                                            className="w-full h-full object-cover"
-                                        />
+                                        <div className="relative w-full h-full">
+                                            <img
+                                                src={item.image_url}
+                                                alt={item.title || 'Portfolio'}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        </div>
                                         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                                             <button
                                                 onClick={() => handleDeleteImage(item.id, item.image_url)}

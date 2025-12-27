@@ -1,5 +1,5 @@
 import ServiceCard from '../components/ServiceCard'
-import { Heart, Sparkles, Clock, Calendar, Users, Star } from 'lucide-react'
+import { Heart, Clock, Calendar, Users, Star } from 'lucide-react'
 
 export default function ServicesPage() {
     const services = [
