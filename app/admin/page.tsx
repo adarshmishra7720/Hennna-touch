@@ -66,7 +66,7 @@ export default function AdminDashboard() {
                 processChartData(result.interactions || [], result.leads || [], 7)
             } else {
                 console.error('Error fetching data:', result.error)
-                setFetchError(result.error)
+                setFetchError(result.error || 'Unknown error')
             }
         } catch (err) {
             console.error('Failed to fetch admin data', err)

@@ -44,9 +44,10 @@ export async function uploadImage(formData: FormData) {
         if (dbError) throw dbError
 
         return { success: true, url: publicUrl }
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error('Error uploading image:', error)
-        return { success: false, error: error.message }
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+        return { success: false, error: errorMessage }
     }
 }
 
@@ -85,9 +86,10 @@ export async function getAdminData() {
             interactions: interactionsResult.data,
             portfolio: portfolioResult.data
         }
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error('Error in getAdminData:', error)
-        return { success: false, error: error.message }
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+        return { success: false, error: errorMessage }
     }
 }
 
@@ -164,8 +166,9 @@ export async function deleteImage(id: string, imageUrl: string) {
         if (dbError) throw dbError
 
         return { success: true }
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error('Error deleting image:', error)
-        return { success: false, error: error.message }
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+        return { success: false, error: errorMessage }
     }
 }

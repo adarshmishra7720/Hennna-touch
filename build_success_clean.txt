@@ -1,0 +1,45 @@
+﻿
+> tmp_init@0.1.0 build
+> next build
+
+  Γû▓ Next.js 14.2.35
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+ Γ£ô Compiled successfully
+   Linting and checking validity of types ...
+node.exe : Failed to compile.
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Failed  
+   to compile.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+./app/admin/page.tsx:69:31
+Type error: Argument of type 'string | undefined' is 
+not assignable to parameter of type 
+'SetStateAction<string | null>'.
+  Type 'undefined' is not assignable to type 
+'SetStateAction<string | null>'.
+
+[0m [90m 67 |[39m             } [36melse[39m 
+{[0m
+[0m [90m 68 |[39m                 
+console[33m.[39merror([32m'Error fetching 
+data:'[39m[33m,[39m result[33m.[39merror)[0m
+[0m[31m[1m>[22m[39m[90m 69 |[39m              
+   setFetchError(result[33m.[39merror)[0m
+[0m [90m    |[39m                               
+[31m[1m^[22m[39m[0m
+[0m [90m 70 |[39m             }[0m
+[0m [90m 71 |[39m         } [36mcatch[39m (err) 
+{[0m
+[0m [90m 72 |[39m             
+console[33m.[39merror([32m'Failed to fetch admin 
+data'[39m[33m,[39m err)[0m
+Next.js build worker exited with code: 1 and signal: 
+null
